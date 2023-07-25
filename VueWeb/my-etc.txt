@@ -1,4 +1,5 @@
-sudo chown -R ec2-user:ec2-user /srv/
+$ sudo chown -R ec2-user:ec2-user /srv/
 $ sudo yum install tree
 $ sudo yum install git
-git clone https://github.com/hongseongjun/SC_VueWeb001.git
+$ cd /srv
+$ git clone https://github.com/hongseongjun/SC_VueWeb001.git
