@@ -1,9 +1,11 @@
+[aws ec2] => git clone
 $ sudo chown -R ec2-user:ec2-user /srv/
 $ sudo yum install tree
 $ sudo yum install git
 $ cd /srv
 $ git clone https://github.com/hongseongjun/SC_VueWeb001.git
 
+[aws ec2] => setup venv
 $ sudo yum install python3-venv
 $ cd ~
 $ python3 -m venv sc-venv
@@ -11,3 +13,9 @@ $ source sc-venv/bin/activate
 $ cd /srv/SC_VueWeb001/
 $ /home/ec2-user/sc-venv/bin/python3 -m pip install --upgrade pip
 $ pip3 install -r requirements.txt
+
+[windows] => extract packages
+> pip freeze > requirements.txt
+> pip list --format=freeze > requirements.txt
+> conda list --export > requirements.txt
+> conda create --name <envname> --file requirements.txt
