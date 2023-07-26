@@ -1,21 +1,27 @@
-[aws ec2] => git clone
+1. [windows] => extract packages
+> pip freeze > requirements.txt
+> pip list --format=freeze > requirements.txt
+> conda list --export > requirements.txt
+> conda create --name <envname> --file requirements.txt
+> git upload
+
+2. [aws ec2] => git clone
 $ sudo chown -R ec2-user:ec2-user /srv/
 $ sudo yum install tree
 $ sudo yum install git
 $ cd /srv
 $ git clone https://github.com/hongseongjun/SC_VueWeb001.git
 
-[aws ec2] => setup venv
+3. [aws ec2] => setup venv & running
 $ sudo yum install python3-venv
 $ cd ~
 $ python3 -m venv sc-venv
 $ source sc-venv/bin/activate
 $ cd /srv/SC_VueWeb001/
 $ /home/ec2-user/sc-venv/bin/python3 -m pip install --upgrade pip
-$ pip3 install -r requirements.txt
-
-[windows] => extract packages
-> pip freeze > requirements.txt
-> pip list --format=freeze > requirements.txt
-> conda list --export > requirements.txt
-> conda create --name <envname> --file requirements.txt
+$ pip3 install -r requirements.txt,  error at psycopg2 ********************
+$ pip install aws-psycopg2
+$ python3 manage.py runserver 0:8080
+> aws-ec2-sg-인바운드규칙 : tcp-ip 8080 port appending
+> settings.py : ALLOWED_HOSTS = ['*']
+> http://ec2-15-164-212-231.ap-northeast-2.compute.amazonaws.com:8080/
