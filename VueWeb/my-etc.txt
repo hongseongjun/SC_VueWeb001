@@ -17,7 +17,7 @@ $ sudo yum install python3-venv
 $ cd ~
 $ python3 -m venv sc-venv
 $ source sc-venv/bin/activate
-$ cd /srv/SC_VueWeb001/
+$ cd /srv/SC_VueWeb001/VueWeb/
 $ /home/ec2-user/sc-venv/bin/python3 -m pip install --upgrade pip
 $ pip3 install -r requirements.txt,  error at psycopg2 ********************
 $ pip install aws-psycopg2
@@ -25,3 +25,20 @@ $ python3 manage.py runserver 0:8080
 > aws-ec2-sg-인바운드규칙 : tcp-ip 8080 port appending
 > settings.py : ALLOWED_HOSTS = ['*']
 > http://ec2-15-164-212-231.ap-northeast-2.compute.amazonaws.com:8080/
+
+4. [ect-1]
+------------------------------------------------------------------------------------------------------
+/home/ec2-user/sc-venv
+/srv/43.201.110.164/VueWeb
+/etc/httpd/conf/httpd.conf
+/var/www/html
+------------------------------------------------------------------------------------------------------ ****
+$ systemctl daemon-reexec <= deamon reset
+$ cp -ai /home/ec2-user/.local/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so
+     /etc/httpd/modules/
+> sudo nano /etc/httpd/config/httpd.conf
+  >> LoadModule wsgi_module modules/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so
+  >> WSGIScriptAlias / /srv/SC_VueWeb001/VueWeb/VueWeb/wsgi.py process-group=group1
+  >> WSGIDaemonProcess group1 python-path=/srv/SC_VueWeb001/VueWeb/VueWeb/ python-home=/home/ec2-user/sc-venv
+  >> WSGIProcessGroup group1
+------------------------------------------------------------------------------------------------------
