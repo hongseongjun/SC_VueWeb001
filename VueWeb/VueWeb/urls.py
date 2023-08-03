@@ -14,8 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.conf.urls.static import static
+from users.views import index
+from .settings import *
 
+# 1. Setup urlpatterns
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', index),                                    # User Site : Home
+    path('admin/', admin.site.urls),                    # Admin Site
+    path('users/', include('users.urls')),              # User Site : [users]
 ]
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+urlpatterns += static(STATIC_URL, document_root=STATIC_ROOT)
+
+# 2. AdminSite attributes 설정 : 2021.03.05
+admin.site.site_header = '사이트 헤더'
+admin.site.site_title = 'SC-Admin Site'
+admin.site.index_title = 'SC Project'
