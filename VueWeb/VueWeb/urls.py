@@ -18,7 +18,6 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from users.views import index
 from .settings import *
-from users import urls
 
 # 1. Setup urlpatterns
 urlpatterns = [
