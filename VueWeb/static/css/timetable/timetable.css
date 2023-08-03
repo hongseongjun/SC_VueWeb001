@@ -1,0 +1,259 @@
+/* InjeComputerEngineering Timetable CSS */
+
+/* timetable_list */
+.timetable_thead {
+    color: black !important;
+}
+
+.timetable_th{
+    color: black !important;
+    font-weight: bold;
+}
+
+.mon, .tue, .wed, .thu, .fri, .sat, .sun {
+    padding-top:8px !important;
+    padding-bottom:5px !important;
+    padding-left:5px !important;
+    padding-right:5px !important;
+    word-break: break-all;
+    width:12.5%;
+    font-size: 14px;
+}
+/* box-shadow : 0px 2px 8px 0px gray;
+'box-shadow' : '0 7px 30px 3px gray' */
+
+.border_none_cell {
+    color:gray;
+    text-align: right;
+    font-weight: 400;
+    padding-top:0px !important;
+    padding-left:0px !important;
+    padding-right:3px !important;
+    border-left: 1px solid #fafafa !important;
+    border-top: 1px solid #fafafa !important;
+    border-bottom: 1px solid #fafafa !important;
+}
+
+.border_none {
+    border-left: 1px solid #fafafa !important;
+    border-top: 1px solid #fafafa !important;
+    border-bottom: 1px solid #fafafa !important;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top:0px !important;
+    padding-left:0px !important;
+    padding-right:5px !important;
+    width:56px;
+}
+
+.nav-link {
+    color:#d14040f2;
+    font-weight: 600;
+}
+
+.all_view {
+    font-weight:550;
+}
+
+.none_view {
+    font-weight:550;
+    color:gray;
+}
+
+.all_view_title {
+    font-weight:600;
+    background-color: #fff1f1;
+}
+
+.all_view_subject {
+    font-weight:600;
+    background-color: #fff1f1;
+}
+
+.all_view_professor {
+    font-weight:600;
+    width:12%;
+    background-color: #fff1f1;
+}
+
+.all_view_date {
+    font-weight:600;
+    width:23%;
+    background-color: #fff1f1;
+}
+
+.all_view_time {
+    font-weight:600;
+    width:14%;
+    background-color: #fff1f1;
+}
+
+.all_view_location {
+    font-weight:600;
+    width:19%;
+    background-color: #fff1f1;
+}
+
+.new_Badge {
+    font-weight: 500 !important;
+    margin-top: 8px !important;
+    margin-bottom: -5px !important;
+}
+
+
+/* timetable_edit_form */
+#save_btn {
+    background-color: gray;
+    color: white;
+    font-size: 13px;
+    padding: 3px 8px;
+    margin-left: -5px;
+    margin-bottom: -4px;
+}
+
+
+/*timatable_update*/
+.delete_btn {
+    background-color: #b90303f2 !important;
+    color: white !important;
+    font-size: 13px !important;
+    padding: 3px 8px !important;
+    margin-left: -5px !important;
+    margin-right: 10px !important;
+    margin-bottom: -4px !important;
+    margin-top: 6px !important;
+}
+
+.update_view_subject {
+    font-weight:600;
+    background-color: #fff1f1;
+}
+
+.update_view_professor {
+    font-weight:600;
+    width:10%;
+    background-color: #fff1f1;
+}
+
+.update_view_date {
+    font-weight:600;
+    width:19%;
+    background-color: #fff1f1;
+}
+
+.update_view_day {
+    font-weight:600;
+    width:10%;
+    background-color: #fff1f1;
+}
+
+.update_view_time {
+    font-weight:600;
+    width:9%;
+    background-color: #fff1f1;
+}
+
+.update_view_time_length {
+    font-weight:600;
+    width:9.5%;
+    background-color: #fff1f1;
+}
+
+.update_view_location {
+    font-weight:600;
+    width:15.5%;
+    background-color: #fff1f1;
+}
+
+.form-control {
+    height: calc(1.5em + 0.55rem + 2px) !important;
+    padding:0px 12px !important;
+    font-size:14.4px !important;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    margin-left: 5px;
+}
+
+.fa-plus-circle {
+    cursor: pointer;
+    color:#d14040f2;
+    margin-bottom:30px;
+}
+
+.fa-plus-circle:hover{
+    color: #bd1010;
+}
+
+
+/*timatable_mytable*/
+#myTimeTable {
+    width: 1056px;
+    margin-left: 54px;
+    margin-bottom: -16px;
+    margin-top: -1px;
+    box-shadow: none;
+}
+
+.myTimeTableClass {
+    padding: 0.5rem 1.25rem !important;
+    cursor: pointer;
+    border-bottom: 1px solid #d8cccc;
+    background-color: #fff1f1 !important;
+}
+
+.myTimeTableClass:hover {
+    background-color: #ffe8e8f2 !important;
+}
+
+
+.myTimeTableEdit {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.scroll_icon {
+    float: right;
+    margin-top: 6px;
+}
+
+#collapseOne {
+    border-bottom: none !important;
+}
+
+.checkTable {
+    margin-top: -20px;
+}
+
+.editFormTitle {
+    font-weight: bold;
+    border-bottom: 1px solid #c7c7c7 !important;
+}
+
+.sortTable {
+    width: 25%;
+    float: left;
+}
+
+.check_view {
+    font-weight:550;
+    border-bottom: 1px solid #ffffff !important;
+}
+
+.checkForm {
+    margin-bottom: -15px;
+}
+
+#myTimeTableSaveBtn {
+    background-color: #d14040f2;
+    color: white;
+    font-size: 14px;
+  }
+
+  .thBorderNone {
+    border-bottom: 1px solid #ffffff !important;
+  }
+
+  .saveBtnMargin {
+    margin-bottom: -22px !important;
+    margin-top: -12px !important;
+  }

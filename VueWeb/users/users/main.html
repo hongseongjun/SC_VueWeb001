@@ -1,0 +1,127 @@
+{% extends "users/main_base.html" %}
+{% load static %}
+{% block mobileView %}
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+{% endblock %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/index/owl.carousel.min.css' %}" />
+{% endblock %}
+
+{% block contents %}
+<!-------------------------------------------------------------------------------------------------------------------->
+<div style="margin: 55px -10px -40px 4px;">
+    <!-- 1. 타이틀 carouselContainer -->
+    <!---------------------------------------------------------------------------------------------------------------->
+    <div class="container" id="carouselContainer" style="margin-bottom: -5px;">
+        <div>
+            <a href="#" class="customPrevBtn carouselHover" style="float:left;"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        </div>
+        <div class="container" id="carouselMinBtn" style="width: 91%; float:left; padding: 0 !important">
+            <div class="owl-carousel centernonloop">
+                <a href="https://species.nibr.go.kr/index.do" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-notes-medical"></i> 한반도의 생물다양성</h5>
+                    </div>
+                </a>
+                <a href="http://www.algae.or.kr/" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-user-check"></i>&nbsp;
+                            <span id="injeLink1"> 한국조류학회</span></h5>
+                    </div>
+                </a>
+                <a href="http://www.korentsoc.or.kr/" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-user-graduate"></i>&nbsp;
+                            <span id="injeLink2">한국곤충학회</span></h5>
+                    </div>
+                </a>
+                <a href="http://www.insects.or.kr/" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-user-tie"></i>&nbsp;
+                            <span id="injeLink3">한국의 곤충</span></h5>
+                    </div>
+                </a>
+                <a href="https://insect.korea.ac.kr/" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-bed"></i>
+                            <span id="injeLink4">한국의 곤충연구소</span></h5>
+                    </div>
+                </a>
+                <a href="http://www.krsh.co.kr/" target="_blank" class="item-class">
+                    <div class="text" style="text-align: center;">
+                        <h5 class="class-heading carouselFont text-info"><i class="fas fa-bed"></i>
+                            <span id="injeLink5">한국양서.파충류학회</span></h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div>
+            <a href="#" class="customNextBtn carouselHover"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
+        </div>
+    </div>
+    <br><br><br>
+    <!---------------------------------------------------------------------------------------------------------------->
+    <!-- 2. 본 내용 Container -->
+    <!---------------------------------------------------------------------------------------------------------------->
+    <!-- 1) Upper Part Contents of Main Body     -->
+    <div class="row">
+        <!--    1.1) 최근 공지사항  -->
+        <div class="col-sm-5 d-flex">
+            <div class="shadow p-3 bg-white rounded" style="width:96%;">
+                <span style="font-size: 18px; color: #800000; font-weight: bold; float:left;">
+                    <i class="fas fa-bullhorn"></i>&nbsp;&nbsp;최근 공지사항
+                </span>
+                <div class="mt-3" style="text-align: right; margin-bottom: 40px; padding-top: -5px;">
+                    <a href="{% url 'notice:notice_list' %}" style="background-color: #d14040f2; color:white; font-size: 13px; margin-top: -5px; margin-right: -5px;" class="btn btn btn-sm">전체보기</a>
+                </div>
+                <div style="margin-bottom: -47.56px;">
+                {% for notice in notice_list %}
+                <div class="notice_box">
+                    <div class="shadow-none mb-5 rounded" onclick="location.href='/notice/{{ notice.id }}'"
+                        style="padding: 12px; margin-top: -36px; margin-bottom: -36px; cursor:pointer; height:52px;">
+                        <span style="color: gray; font-size:16px; font-weight:550;">&nbsp;&nbsp;({{ forloop.counter }})&nbsp;&nbsp;{{ notice.title|truncatechars:24 }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!--    1.2) Right Side Image of Main-Body  -->
+        <div class="col-sm-7 d-flex">
+            <div class="rounded" style="width:90%; height:350px">
+                <p style="font-size: medium; font-weight: bolder; color: #00C000;">가장 맑고 깨끗한 자연,&emsp;우리와(Wa) 함께하는 자연!&emsp;자연과(Gwa) 함께하는 우리!</p>
+                <img src="{% static 'img/main_up_01.jpg' %}" width="100%" height="86%" class="rounded">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- 2) Lower Part Contents of Main Body     -->
+    <p align="center">가장 웅장하고 후련한, 가장 활기차고 유괘한, 가장 감미롭고 정갈한, 가장 친근하고 정겨운, 가장 평화롭고 훈훈한, 가장 애절하고 간절한, 가장 처연하고 구슬픈, 가장 괴기하고 이상한&emsp;-자연의 소리-</p>
+    <div class="row">
+        <div class="col-sm-4 d-flex">
+            <div class="p-3 rounded" style="width:90%; height: 300px;">
+                <img src="{% static 'img/main_low_01.png' %}" width="100%" height="100%" class="rounded-circle">
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex">
+            <div class="p-3 rounded" style="width:90%; height: 300px;">
+                <img src="{% static 'img/main_low_02.jpg' %}" width="100%" height="100%" class="rounded-circle">
+            </div>
+        </div>
+        <div class="col-sm-4 d-flex">
+            <div class="p-3 rounded" style="width:90%; height: 300px;">
+                <img src="{% static 'img/main_low_03.jpg' %}" width="100%" height="100%" class="rounded-circle">
+            </div>
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------------------------------->
+</div>
+<!-------------------------------------------------------------------------------------------------------------------->
+<script src="{% static 'js/index/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/index/aos.js' %}"></script>
+<script src="{% static 'js/index/jquery.sticky.js' %}"></script>
+<script src="{% static 'js/index/customCarousel.js' %}"></script>
+{% endblock %}

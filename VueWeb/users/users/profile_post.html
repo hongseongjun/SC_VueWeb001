@@ -1,0 +1,220 @@
+{% extends "users/main_base.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block mobileView %}
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/timetable/timetable.css' %}" type="text/css">
+{% endblock %}
+
+{% block contents %}
+<br><br>
+<div class="container-fluid">
+    <h5><strong><i class="fas fa-history"></i>&nbsp;내가 작성한 글보기</strong></h5>
+
+    <!--    I. 탭 메뉴 설정  : [공지사항, 자유게시판, 자료실, 채집음원] -------------------------------------->
+    <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-bottom: -0.5px;">
+
+        <!--    1) [어드민 관리자 권한] 보기 탭 설정 : 공지사항, 자유게시판    -->
+        {% if request.user.level == '0' or request.user.level == '1' %}
+        <li class="nav-item">
+            <a class="nav-link active" id="notice-tab" data-toggle="tab" href="#notice" role="tab"
+               aria-controls="notice" aria-selected="false">공지사항</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="free-tab" data-toggle="tab" href="#free" role="tab"
+               aria-controls="free" aria-selected="true">자유게시판</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="data-tab" data-toggle="tab" href="#data" role="tab"
+               aria-controls="data" aria-selected="true">자료실</a>
+        </li>
+
+        <!--    2) [일반 이용자 권한] 보기 탭 설정 : 자유게시판     -->
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link active" id="free-tab" data-toggle="tab" href="#free" role="tab"
+               aria-controls="free" aria-selected="true">자유게시판</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <!--    II. 탭 내용 설정  -------------------------------------------------------------------------->
+    <div class="tab-content" id="myTabContent">
+
+        <!--    1. [어드민 관리자 권한] 보기 탭 내용 : 공지사항, 자유게시판   ----->
+        {% if request.user.level == '0' or request.user.level == '1' %}
+
+        <!--    1) 공지사항     ----->
+        <div class="tab-pane fade show active" id="notice" role="tabpanel" aria-labelledby="notice-tab">
+            <table class="table table-sm table-hover">
+                <thead style="border-top: 1px solid #dee2e6;">
+                    <tr class="text-center">
+                        <th class="all_view_title">번호</th>
+                        <th class="all_view_title">제목</th>
+                        <th class="all_view_title">작성자</th>
+                        <th class="all_view_title">등록일</th>
+                        <th class="all_view_title">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if notice_list %}
+                        {% for notice in notice_list %}
+                        <tr class="text-center" style="font-weight: bold; cursor:pointer;" onclick="location.href='/notice/{{ notice.id }}/'">
+                            <td class="all_view">{{ notice.id }}</td>
+                            <td class="text-left all_view" style="width:50%">
+                                <a id="notice-{{ notice.id }}">{{ notice.title|truncatechars:30 }}</a>
+                            </td>
+                            <td class="all_view">{{ notice.writer }}</td>
+                            <td class="all_view">{{ notice.rdate|date:'Y. m. d' }}</td>
+                            <td class="all_view">{{ notice.hits }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="text-center" style="font-weight: bold; color:gray;">
+                        <td class="all_view" colspan="5"><i class="fas fa-info-circle"></i>&nbsp;작성한 글이 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!--    2) 자유게시판     ------>
+        <div class="tab-pane fade show" id="free" role="tabpanel" aria-labelledby="free-tab">
+            <table class="table table-sm table-hover">
+                <thead style="border-top: 1px solid #dee2e6;">
+                    <tr class="text-center">
+                        <th class="all_view_title">번호</th>
+                        <th class="all_view_title">제목</th>
+                        <th class="all_view_title">작성자</th>
+                        <th class="all_view_title">등록일</th>
+                        <th class="all_view_title">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if free_list %}
+                        {% for free in free_list %}
+                        <tr class="text-center" style="font-weight: bold; cursor:pointer;" onclick="location.href='/free/{{ free.id }}/'">
+                            <td class="all_view">{{ free.id }}</td>
+                            <td class="text-left all_view" style="width:50%">
+                                {% if free.category == '자유' %}
+                                <span class="badge badge-light">{{ free.category }}</span>&nbsp;
+                                {% elif free.category == '질문' %}
+                                <span class="badge badge-danger">{{ free.category }}</span>&nbsp;
+                                {% elif free.category == '정보' %}
+                                <span class="badge badge-info">{{ free.category }}</span>&nbsp;
+                                {% endif %}
+                                <a id="free-{{ free.id }}">{{ free.title|truncatechars:30 }}</a>
+                                {% if free.comments %}
+                                &nbsp;<span style="color:gray;">[{{ free.comments }}]</span>
+                                {% endif %}
+                            </td>
+                            <td class="all_view">{{ free.writer }}</td>
+                            {% if free.created_string == False %}
+                            <td class="all_view">{{ free.rdate|date:'m월 d일' }}</td>
+                            {% else %}
+                            <td class="all_view">{{ free.created_string }}</td>
+                            {% endif %}
+                            <td class="all_view">{{ free.hits }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="text-center" style="font-weight: bold; color:gray;">
+                        <td class="all_view" colspan="5"><i class="fas fa-info-circle"></i>&nbsp;작성한 글이 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!--    3) 자료실     ----->
+        <div class="tab-pane fade show" id="data" role="tabpanel" aria-labelledby="data-tab">
+            <table class="table table-sm table-hover">
+                <thead style="border-top: 1px solid #dee2e6;">
+                    <tr class="text-center">
+                        <th class="all_view_title">번호</th>
+                        <th class="all_view_title">제목</th>
+                        <th class="all_view_title">작성자</th>
+                        <th class="all_view_title">등록일</th>
+                        <th class="all_view_title">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if data_list %}
+                        {% for data in data_list %}
+                        <tr class="text-center" style="font-weight: bold; cursor:pointer;" onclick="location.href='/data_room/{{ data.id }}/'">
+                            <td class="all_view">{{ data.id }}</td>
+                            <td class="text-left all_view" style="width:50%">
+                                <a id="notice-{{ data.id }}">{{ data.title|truncatechars:30 }}</a>
+                            </td>
+                            <td class="all_view">{{ data.writer }}</td>
+                            <td class="all_view">{{ data.rdate|date:'Y. m. d' }}</td>
+                            <td class="all_view">{{ data.hits }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="text-center" style="font-weight: bold; color:gray;">
+                        <td class="all_view" colspan="5"><i class="fas fa-info-circle"></i>&nbsp;작성한 글이 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!--    2. [일반 이용자 권한] 보기 탭 내용 : 자유게시판  ----->
+        {% else %}
+
+        <!--    1) 자유게시판     ------>
+        <div class="tab-pane fade show active" id="free" role="tabpanel" aria-labelledby="free-tab">
+            <table class="table table-sm table-hover">
+                <thead style="border-top: 1px solid #dee2e6;">
+                    <tr class="text-center">
+                        <th class="all_view_title">번호</th>
+                        <th class="all_view_title">제목</th>
+                        <th class="all_view_title">작성자</th>
+                        <th class="all_view_title">등록일</th>
+                        <th class="all_view_title">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if free_list %}
+                        {% for free in free_list %}
+                        <tr class="text-center" style="font-weight: bold; cursor:pointer;" onclick="location.href='/free/{{ free.id }}/'">
+                            <td class="all_view">{{ free.id }}</td>
+                            <td class="text-left all_view" style="width:50%">
+                                {% if free.category == '자유' %}
+                                <span class="badge badge-light">{{ free.category }}</span>&nbsp;
+                                {% elif free.category == '질문' %}
+                                <span class="badge badge-danger">{{ free.category }}</span>&nbsp;
+                                {% elif free.category == '정보' %}
+                                <span class="badge badge-info">{{ free.category }}</span>&nbsp;
+                                {% endif %}
+                                <a id="free-{{ free.id }}">{{ free.title|truncatechars:30 }}</a>
+                                {% if free.comments %}
+                                &nbsp;<span style="color:gray;">[{{ free.comments }}]</span>
+                                {% endif %}
+                            </td>
+                            <td class="all_view">{{ free.writer }}</td>
+                            {% if free.created_string == False %}
+                            <td class="all_view">{{ free.registered_date|date:'m월 d일' }}</td>
+                            {% else %}
+                            <td class="all_view">{{ free.created_string }}</td>
+                            {% endif %}
+                            <td class="all_view">{{ free.hits }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="text-center" style="font-weight: bold; color:gray;">
+                        <td class="all_view" colspan="5"><i class="fas fa-info-circle"></i>&nbsp;작성한 글이 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

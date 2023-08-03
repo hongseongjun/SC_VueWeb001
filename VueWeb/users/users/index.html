@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+  <head>
+    <title>WaGwa-SC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  1) [favicon.ico] 설정   -->
+    <link rel="shortcut icon" href="{% static 'img/wagwa_sc.png' %}">
+
+    <!--  2) 필수설정 CSS(3개) : bootstrap, Font Awesome Icon, style(My Custom)   -->
+    <link rel="stylesheet" href="{% static 'css/index/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/index/style.css' %}">
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" oncontextmenu="return false" ondragstart="return false">
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="site-wrap">
+    <!----------------------------------------------------------------------------------------------------------->
+    <!--  1) Headline and Navbar  -->
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    <div class="site-navbar-wrap">
+      <div class="site-navbar-top">
+        <div class="container py-3">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <div class="d-flex mr-auto">
+                <a href="#" class="d-flex align-items-center mr-4">
+                  <span class="icon-envelope mr-2"></span>
+                  <span class="d-none d-md-inline-block">sjishong@naver.com</span>
+                </a>
+                <a href="#" class="d-flex align-items-center mr-auto">
+                  <span class="icon-phone mr-2"></span>
+                  <span class="d-none d-md-inline-block">010-3520-5794</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-navbar site-navbar-target js-sticky-header">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-2">
+              <h1 class="my-0 site-logo"><a href="/">WaGwa-SC</a></h1>
+            </div>
+            <div class="col-10">
+              <nav class="site-navigation text-right" role="navigation">
+                <div class="container">
+                  <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3">
+                    <a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a>
+                  </div>
+
+                  <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+                    <li class="nav-item">
+                      <a class="nav-link" href="https://species.nibr.go.kr/index.do"
+                         target="_blank" style="font-weight: 600;">국가생물다양성센터</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.algae.or.kr/"
+                           target="_blank" style="font-weight: 600;">한국조류학회</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.korentsoc.or.kr/"
+                           target="_blank" style="font-weight: 600;">한국곤충학회</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.insects.or.kr/"
+                           target="_blank" style="font-weight: 600;">한국의 곤충</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://insect.korea.ac.kr/"
+                           target="_blank" style="font-weight: 600;">한국의 곤충연구소</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.krsh.co.kr/"
+                           target="_blank" style="font-weight: 600;">한국양서.파충류학회</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!--  2) Body Contents  -->
+    <div class="site-blocks-cover overlay" data-aos="fade" data-stellar-background-ratio="0.5"id="home-section">
+      <div class="container">
+        <div class="row align-items-center text-center justify-content-center">
+          <div class="col-md-8">
+            <h1 class="font-weight-bold">WaGwa-SC</h1>
+            <p class="sub-text mb-4 d-block">Stage Change 음원 관리시스템</p>
+            {% if user.is_authenticated %}
+            <button onclick="location.href='/users/main/'">마이페이지</button>
+            <button onclick="location.href='/users/logout/'">로그아웃</button>
+            {% else %}
+            <button onclick="location.href='/users/login/'">로그인</button>
+            <button onclick="location.href='/users/agreement/'">회원가입</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <!----------------------------------------------------------------------------------------------------------->
+    <!--  3) Footer  -->
+    <footer class="site-footer">
+      <div class="container">
+        <!-- <div class="row pt-5 mt-5 text-center"> -->
+        <div class="row text-center">
+          <div class="col-md-12">
+            <p>
+              Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+              All rights reserved | This template is made with by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+              & Seongjun-Hong
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{% static 'js/index/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/index/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/index/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/index/aos.js' %}"></script>
+  <script src="{% static 'js/index/jquery.sticky.js' %}"></script>
+  <script src="{% static 'js/index/main.js' %}"></script>
+
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags %}
+  <script>
+    alert("{{ message.message }}")
+  </script>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  </body>
+</html>
+
